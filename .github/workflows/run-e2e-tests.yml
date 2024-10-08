@@ -1,0 +1,38 @@
+name: Run E2E Tests
+
+on: [pull_request]
+
+jobs:
+  run-e2e-tests:
+    name: Run E2E Tests
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: bitnami/postgresql
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USERNAME: docker
+          POSTGRES_PASSWORD: docker
+          POSTGRES_DB: ignite_solid
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        name: Setup pnpm
+        with:
+          version: 9.11.0
+
+      - uses: actions/setup-node@v4
+        name: Setup Node
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      - run: pnpm install
+      - run: pnpm test:e2e
+        env:
+          JWT_SECRET: testing
+          DATABASE_URL: "postgresql://docker:docker@localhost:5432/ignite_solid?schema=public"
