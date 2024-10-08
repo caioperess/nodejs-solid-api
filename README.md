@@ -21,8 +21,8 @@ GymPass style app
 - [x] The user should not be able to do 2 check-ins in the same day;
 - [x] The user should not be able to do a check-in if he is more than 100m far from the gym
 - [x] The check-in can be validated up to 20 minutes after its creation;
-- [ ] The check-in can only be validated by administrators;
-- [ ] The gym can only be registered up by administrators;
+- [x] The check-in can only be validated by administrators;
+- [x] The gym can only be registered up by administrators;
 
 ## RNFs (Requisitos não funcionais)
 
